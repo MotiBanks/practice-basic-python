@@ -94,7 +94,7 @@ if password:
         st.success("🎉 Your password looks great!")
 
     st.info("""
-    **💡 Cyber Tip:**  
+    **💡 Cyber Security Tip:**  
     *Use strong, frequently updated passwords to protect yourself from malware attacks.*
     """)
 
