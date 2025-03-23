@@ -62,8 +62,8 @@ def password_strength(password):
 
     return checks, score, message
 
-# Streamlit App
-st.set_page_config(page_title="Smart Password Checker 🔐", page_icon="🔐")
+# Streamlit App Compact Layout
+st.set_page_config(page_title="Smart Password Checker 🔐", page_icon="🔐", layout="centered")
 st.title("🔐 Smart Password Strength Meter")
 
 password = st.text_input("Enter your password", type="password")
@@ -71,40 +71,36 @@ password = st.text_input("Enter your password", type="password")
 if password:
     checks, score, message = password_strength(password)
 
-    st.subheader("Password Analysis:")
-    for check, passed in checks.items():
-        emoji = "✅" if passed else "❌"
-        st.write(f"{emoji} **{check}**")
+    result_col = st.container()
 
-    st.markdown(f"### {message} ({score}/5)")
+    with result_col:
+        st.subheader("Password Analysis:")
+        for check, passed in checks.items():
+            emoji = "✅" if passed else "❌"
+            st.markdown(f"{emoji} **{check}**")
 
-    if score < 5:
-        st.warning("🚨 Improve your password:")
-        if not checks["Length (8+)"]:
-            st.write("- Make your password at least **8 characters long**.")
-        if not checks["Uppercase"]:
-            st.write("- Add **uppercase letters** (A-Z).")
-        if not checks["Lowercase"]:
-            st.write("- Add **lowercase letters** (a-z).")
-        if not checks["Digit"]:
-            st.write("- Include **numbers** (0-9).")
-        if not checks["Special Char"]:
-            st.write("- Add **special characters** (e.g., !, @, #, $).")
-    else:
-        st.success("🎉 Your password looks great!")
+        st.markdown(f"**{message} ({score}/5)**")
 
-    st.info("""
-    **💡 Cyber Tip:**  
-    *Use strong, frequently updated passwords to protect yourself from malware attacks.*
-    """)
+        if score < 5:
+            improvements = []
+            if not checks["Length (8+)"]:
+                improvements.append("- Make your password at least **8 characters long**.")
+            if not checks["Uppercase"]:
+                improvements.append("- Add uppercase letters **(A-Z)**.")
+            if not checks["Lowercase"]:
+                improvements.append("- Add lowercase letters **(a-z)**.")
+            if not checks["Digit"]:
+                improvements.append("- Include numbers **(0-9)**.")
+            if not checks["Special Char"]:
+                improvements.append("- Add special characters **(!, @, #, $)**.")
 
+            st.warning("🚨 Improve your password:")
+            st.markdown("\n".join(improvements))
+        else:
+            st.success("🎉 Your password looks great!")
 
-
-
-
-
-
-
+        st.markdown("💡 **Cyber Tip:**\n\n"
+                    "_Use strong, frequently updated passwords to protect yourself from malware attacks._")
 
 
 
