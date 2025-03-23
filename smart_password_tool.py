@@ -64,14 +64,14 @@ def password_strength(password):
 
 # Streamlit App
 st.set_page_config(page_title="Smart Password Checker 🔐", page_icon="🔐")
-st.title("🔐 Smart Password Strength Meter")
+st.title("Roast My Password 🤡")
 
 password = st.text_input("Enter your password", type="password")
 
 if password:
     checks, score, message = password_strength(password)
 
-    st.subheader("Password Analysis:")
+    st.subheader("You missed a spot, fat finger (here's what's wrong):")
     for check, passed in checks.items():
         emoji = "✅" if passed else "❌"
         st.write(f"{emoji} **{check}**")
@@ -79,7 +79,7 @@ if password:
     st.markdown(f"### {message} ({score}/5)")
 
     if score < 5:
-        st.warning("🚨 Improve your password:")
+        st.warning(" Do better, please 🙏:")
         if not checks["Length (8+)"]:
             st.write("- Make your password at least **8 characters long**.")
         if not checks["Uppercase"]:
