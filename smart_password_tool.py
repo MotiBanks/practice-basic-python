@@ -71,7 +71,7 @@ password = st.text_input("Enter your password", type="password")
 if password:
     checks, score, message = password_strength(password)
 
-    st.subheader("You missed a spot, fat finger (here's what's wrong):")
+    st.subheader("Hey, fat finger (here's what's wrong):")
     for check, passed in checks.items():
         emoji = "✅" if passed else "❌"
         st.write(f"{emoji} **{check}**")
