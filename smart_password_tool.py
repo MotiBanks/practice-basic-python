@@ -40,7 +40,7 @@ def password_strength(password):
     roast_okay = [
         "Decent, but hackers love 'decent'.",
         "Almost there—stop being lazy.",
-        "Not bad, but don't celebrate yet.",
+        "Not bad, but don't celebrate yet Werido.",
         "Better, but still mehn."
     ]
 
